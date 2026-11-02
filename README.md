@@ -142,20 +142,4 @@ O acesso do professor à organização e ao projeto Azure DevOps também deverá
 
 ---
 
-## Checklist da Entrega
-
-- [ ] Confirmar os 17 casos manuais como Test Cases no Azure Boards.
-- [ ] Vincular os testes às funcionalidades e Sprints correspondentes.
-- [ ] Conferir os dados de entrada e os resultados esperados.
-- [ ] Publicar todas as evidências na pasta `docs/sprint-4/evidencias/`.
-- [ ] Finalizar pelo menos 4 testes automatizados no Postman.
-- [ ] Executar e registrar os resultados automatizados.
-- [ ] Gravar o vídeo demonstrando configuração, execução e resultados.
-- [ ] Adicionar o link do vídeo ao README.
-- [ ] Confirmar o acesso do professor ao Azure Boards.
-- [ ] Publicar a entrega na branch `develop`.
-- [ ] Conferir se todos os links estão funcionando.
-
----
-
 *Documentação da 4ª Sprint — Compliance, Quality Assurance & Tests — FIAP 2026.*
