@@ -109,7 +109,7 @@ A collection completa com os scripts está em `docs/sprint-4/Pet_Family_-_QA.pos
 
 ### 🎥 Vídeo de demonstração
 
-**[Assistir ao vídeo — QA Pet Family Sprint 4](https://youtu.be/t1PxkP_zZYs)**
+**[Assistir ao vídeo — QA Pet Family Sprint 4](https://youtu.be/dx3dU4w2qVo)**
 
 ---
 
