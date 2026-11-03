@@ -1,145 +1,147 @@
----
+Compliance, Quality Assurance & Tests
+Challenge CLYVO VET 2026 — FIAP | 2TDSPG
 
-## Sprint 4 — Quality Assurance & Tests
+Repositório de planejamento, execução e evidências de testes do projeto Pet Family — ClyvoVet Challenge.
 
-Nesta Sprint, foram realizados testes funcionais na API Java do projeto **Pet Family — ClyvoVet Challenge**, utilizando o **Postman** para validar as funcionalidades desenvolvidas.
+Acesso rápido: Azure Test Plans · Vídeo da Sprint 4 · GitHub
+📌 Sobre o projeto
+O Pet Family conecta tutores, pets e clínicas veterinárias, oferecendo funcionalidades para acompanhamento dos animais, agendamento de consultas e suporte informativo.
 
-O trabalho contempla o planejamento dos testes, a documentação no Azure Boards, a verificação das respostas da API e a preparação dos testes automatizados, conforme os requisitos da disciplina.
+Este repositório reúne os artefatos de Qualidade e Testes produzidos para o Challenge CLYVO VET 2026.
+Módulos relacionados
+Módulo	Repositório
+App Mobile	PET-FAMILY-MOBILE
+API Java	PET-FAMILY-JAVA
+API .NET	PET-FAMILY-.NET
+DevOps / Cloud	PET-FAMILY-CLOUD
+IoT	PET-FAMILY-IOT
+IA	PET-FAMILY-IA
 
----
 
-## Parte A — Testes Manuais de Software
+🧪 Sprint 4 — Quality Assurance & Tests
+A validação funcional da API Java / Spring Boot foi realizada no Postman. O planejamento, os procedimentos e os resultados esperados foram organizados no Azure DevOps.
 
-Os testes manuais foram realizados utilizando o **Postman**, com requisições HTTP para os endpoints da aplicação.
+Este README destaca quatro testes manuais (CT13 a CT16). No Azure, o plano contém duas suítes com seis casos cadastrados. Os quatro cenários de automação (AT01 a AT04) são descritos separadamente.
+Ambiente de testes
+Item	Descrição
+Backend	Java / Spring Boot
+Arquitetura	API REST
+Ferramenta de testes	Postman
+URL base local	http://localhost:9090
+Autenticação	JWT Bearer Token, conforme o endpoint
+Perfis	TUTOR e VETERINARIO
+Gestão de testes	Azure DevOps / Test Plans
 
-Foram documentados **17 casos de teste**, abrangendo autenticação, gerenciamento de tutores, pets, consultas veterinárias, inteligência artificial e dashboard.
 
-### Ambiente de Testes
+Para reproduzir os testes, a API precisa estar executando localmente. Não publique senhas, credenciais ou tokens JWT no GitHub.
 
-| Tecnologia | Descrição |
-|---|---|
-| Backend | Java / Spring Boot |
-| API | REST |
-| Ferramenta de Testes | Postman |
-| URL Base | `http://localhost:9090` |
-| Gerenciamento | Azure DevOps / Azure Boards |
-| Autenticação | JWT Bearer Token |
-| Perfis de Acesso | TUTOR e VETERINARIO |
+Parte A — Testes manuais e Azure DevOps
+Organização: RM561810
+Projeto: Pet Family - ClyvoVet Challenge
+Plano de testes: Pet Family - Plano de Testes Sprint 4 (ID 58)
+Link: Abrir Azure Test Plans
+Suítes cadastradas
+Suíte	PBI	Casos
+Agendamento de Consultas	#55	3
+Chat com Assistente IA Clínico	#22	3
+Total	—	6
 
-### Azure Boards
 
-Os casos de teste estão sendo organizados no Azure DevOps, incluindo objetivos, dados de entrada, procedimentos de execução e resultados esperados.
+Os casos registrados no Azure utilizam Step Action e Step Expected Result para documentar o procedimento e o resultado esperado de cada etapa.
+Quatro testes apresentados
+Caso	Funcionalidade	Método	Endpoint	HTTP observado
+CT13	Agendar consulta	POST	/consultas/agendar	201 Created
+CT14	Registrar interação com IA	POST	/interacoes-ia	201 Created
+CT15	Listar interações com IA	GET	/interacoes-ia	200 OK
+CT16	Histórico de IA por pet	GET	/interacoes-ia/pet/1	200 OK
 
-**Organização:** RM561810
 
-**Projeto:** Pet Family - ClyvoVet Challenge
+Os códigos HTTP acima foram observados nos testes manuais do Postman. A validação também considera o conteúdo JSON e as regras de autenticação e autorização da API.
+CT13 — Agendar consulta veterinária
+Objetivo: verificar a criação de uma consulta para um pet cadastrado.
+Requisição: POST http://localhost:9090/consultas/agendar
+{
+  "petId": 1,
+  "tipoConsulta": "Vacinação",
+  "data": "2026-12-10",
+  "horario": "14:00",
+  "observacoes": "V10 + antirrábica"
+}
+Esperado: 201 Created, com a consulta criada e status AGENDADA.
+CT14 — Registrar interação com IA
+Objetivo: verificar o registro de pergunta e resposta do assistente.
+Requisição: POST http://localhost:9090/interacoes-ia
+{
+  "pergunta": "Meu cachorro está tossindo muito, o que pode ser?",
+  "categoria": "Sintomas",
+  "petId": 1
+}
+Esperado: 201 Created, com identificação da interação e resposta do assistente.
+CT15 — Listar interações com IA
+Requisição: GET http://localhost:9090/interacoes-ia
+Esperado: 200 OK, com os registros de interações em JSON.
+CT16 — Consultar histórico de IA do pet
+Requisição: GET http://localhost:9090/interacoes-ia/pet/1
+Esperado: 200 OK, com as interações associadas ao pet de ID 1 (Thor nos dados do teste).
+📸 Evidências no Postman
+As imagens devem ser publicadas em docs/sprint-4/evidencias/ na mesma branch deste README.
+Teste	Evidência
+CT13 — Agendamento	[Visualizar](docs/sprint-4/evidencias/CT13_POST__consultas_agendar.png)
+CT14 — Interação IA	[Visualizar](docs/sprint-4/evidencias/CT14_POST__interacoes-ia.png)
+CT15 — Lista de interações	[Visualizar](docs/sprint-4/evidencias/CT15_GET__interacoes-ia.png)
+CT16 — Histórico por pet	[Visualizar](docs/sprint-4/evidencias/CT16_GET__interacoes-ia_pet_1.png)
 
-**Link:** [Acessar Azure Boards — Pet Family](https://dev.azure.com/RM561810/Pet%20Family%20-%20ClyvoVet%20Challenge/_workitems/recentlyupdated/)
 
-### Casos de Teste Realizados
+Atenção: os links funcionam somente após o envio dos arquivos para os caminhos indicados.
 
-| ID | Descrição do Teste | Resultado HTTP |
-|---|---|---|
-| CT01 | Consultar tutor por ID válido | 200 OK |
-| CT02 | Login com credenciais válidas | 200 OK |
-| CT03 | Listar todos os tutores | 200 OK |
-| CT04 | Buscar tutor pelo nome | 200 OK |
-| CT05 | Listar todos os pets | 200 OK |
-| CT06 | Consultar pet por ID | 200 OK |
-| CT07 | Filtrar pets pelo tutor | 200 OK |
-| CT08 | Filtrar pets por espécie | 200 OK |
-| CT09 | Verificar método HTTP não permitido | 405 Method Not Allowed |
-| CT10 | Listar consultas cadastradas | 200 OK |
-| CT11 | Filtrar consultas por status | 200 OK |
-| CT12 | Listar consultas futuras | 200 OK |
-| CT13 | Agendar consulta veterinária | 201 Created |
-| CT14 | Registrar interação com IA | 201 Created |
-| CT15 | Listar interações com IA | 200 OK |
-| CT16 | Consultar histórico de IA por pet | 200 OK |
-| CT17 | Consultar resumo do dashboard | 200 OK |
+Parte B — Automação de testes
+Foram selecionados quatro cenários para automação no Postman, com verificações JavaScript (pm.test() / pm.expect()) e execução no Collection Runner.
+Caso	Cenário automatizado	O que verificar
+AT01	Login de tutor	Código HTTP, token JWT e perfil TUTOR
+AT02	Controle de acesso	Restrições de endpoints conforme o perfil
+AT03	Registro de interação com IA	Criação e dados de resposta JSON
+AT04	Agendamento de consulta	Código HTTP e dados da consulta criada
 
-Os resultados apresentados correspondem às respostas HTTP observadas durante os testes manuais.
 
-O teste CT09 verifica a rejeição de um método HTTP não suportado, sendo esperado o retorno `405 Method Not Allowed`.
+Critérios: status HTTP, campos JSON, autenticação JWT, permissões de acesso e registro dos resultados do Runner.
 
-A validação completa de cada caso também considera os dados retornados e as regras de autorização definidas pela API Java.
+Situação: cenários documentados; o resultado final de aprovação dos quatro testes automatizados deve ser confirmado pela execução real. Os casos cadastrados no Azure, isoladamente, não comprovam a automação.
+🎥 Vídeo de demonstração
+Assistir ao vídeo — QA Pet Family
 
-### Evidências dos Testes
+Para comprovar a Parte B, o vídeo deve apresentar a configuração dos scripts de teste, a execução dos quatro cenários e os resultados no Postman.
+📂 Organização das evidências
+Estrutura esperada para os arquivos destacados neste README:
+PET-FAMILY-QA/
+├── docs/
+│   ├── sprint-3/
+│   │   └── backlog.md
+│   └── sprint-4/
+│       └── evidencias/
+│           ├── CT13_POST__consultas_agendar.png
+│           ├── CT14_POST__interacoes-ia.png
+│           ├── CT15_GET__interacoes-ia.png
+│           └── CT16_GET__interacoes-ia_pet_1.png
+└── README.md
+Confira a existência dos arquivos antes de entregar; esta estrutura é uma referência, não uma confirmação de que já foram publicados.
+🔗 Links de entrega
+Item	Link
+Azure Test Plans	Plano de testes
+Azure Boards	Projeto Pet Family
+GitHub	PET-FAMILY-QA
+Vídeo	Demonstração QA — YouTube
 
-As evidências foram capturadas durante a execução das requisições no Postman e organizadas por caso de teste.
 
-Os arquivos estão disponíveis no diretório:
+Branch de entrega: develop. Antes de finalizar, confirme o acesso do professor ao Azure, os arquivos de evidência e a execução dos quatro testes automatizados.
+👥 Equipe
+Integrante	RM
+Felipe Kirschner Modesto	RM561810
+João Victor Luiz de Oliveira Resende	RM565139
+Pedro Henrique Vaz Ferreira	RM566551
+Vitor Dias dos Santos	RM565422
 
-`docs/sprint-4/evidencias/`
 
-| Teste | Evidência |
-|---|---|
-| CT01 — Consultar tutor | [Visualizar](docs/sprint-4/evidencias/CT01_GET__tutores_1.png) |
-| CT02 — Login | [Visualizar](docs/sprint-4/evidencias/CT02_POST__auth_login.png) |
-| CT03 — Listar tutores | [Visualizar](docs/sprint-4/evidencias/CT03_GET__tutores.png) |
-| CT04 — Buscar tutor | [Visualizar](docs/sprint-4/evidencias/CT04_GET__tutores_nome-Maria.png) |
-| CT05 — Listar pets | [Visualizar](docs/sprint-4/evidencias/CT05_GET__pets.png) |
-| CT06 — Consultar pet | [Visualizar](docs/sprint-4/evidencias/CT06_GET__pets_1.png) |
-| CT07 — Pets por tutor | [Visualizar](docs/sprint-4/evidencias/CT07_GET__pets_tutorId-1.png) |
-| CT08 — Pets por espécie | [Visualizar](docs/sprint-4/evidencias/CT08_GET__pets_especie-Cachorro.png) |
-| CT09 — Método não permitido | [Visualizar](docs/sprint-4/evidencias/CT09_POST__tutores.png) |
-| CT10 — Listar consultas | [Visualizar](docs/sprint-4/evidencias/CT10_GET__consultas.png) |
-| CT11 — Filtrar consultas | [Visualizar](docs/sprint-4/evidencias/CT11_GET__consultas_status-AGENDADA.png) |
-| CT12 — Consultas futuras | [Visualizar](docs/sprint-4/evidencias/CT12_GET__consultas_futuras.png) |
-| CT13 — Agendar consulta | [Visualizar](docs/sprint-4/evidencias/CT13_POST__consultas_agendar.png) |
-| CT14 — Registrar interação IA | [Visualizar](docs/sprint-4/evidencias/CT14_POST__interacoes-ia.png) |
-| CT15 — Listar interações IA | [Visualizar](docs/sprint-4/evidencias/CT15_GET__interacoes-ia.png) |
-| CT16 — Histórico IA por pet | [Visualizar](docs/sprint-4/evidencias/CT16_GET__interacoes-ia_pet_1.png) |
-| CT17 — Dashboard | [Visualizar](docs/sprint-4/evidencias/CT17_GET__dashboard_resumo.png) |
-
----
-
-## Parte B — Automação de Testes
-
-A automação dos testes funcionais utiliza o **Postman**, por se tratar de uma aplicação baseada em APIs REST.
-
-Os testes automatizados utilizam scripts JavaScript para verificar códigos HTTP, dados retornados em JSON e regras de autenticação e autorização.
-
-### Funcionalidades Selecionadas
-
-| Caso | Funcionalidade | Validação |
-|---|---|---|
-| AT01 | Login de Tutor | Autenticação JWT e perfil TUTOR |
-| AT02 | Controle de Acesso | Restrição de funcionalidades por perfil |
-| AT03 | Interação com Assistente IA | Registro e validação de resposta |
-| AT04 | Agendamento de Consulta | Criação e validação de agendamento |
-
-### Critérios de Validação
-
-- Verificação dos códigos HTTP esperados.
-- Validação do conteúdo das respostas JSON.
-- Autenticação utilizando Bearer Token.
-- Verificação das permissões dos perfis TUTOR e VETERINARIO.
-- Execução dos testes utilizando o Collection Runner.
-- Registro dos resultados de execução.
-
-**Status:** Automação em preparação. Os resultados serão incluídos após a execução e validação dos quatro casos.
-
-### Vídeo de Demonstração
-
-A demonstração apresentará a configuração do Postman, os scripts de automação, a execução dos testes e os resultados obtidos.
-
-**Link do vídeo:** [ADICIONAR LINK]
-
----
-
-## Links de Entrega — 4ª Sprint
-
-| Plataforma | Link |
-|---|---|
-| Azure Boards | [Pet Family — Azure DevOps](https://dev.azure.com/RM561810/Pet%20Family%20-%20ClyvoVet%20Challenge/_workitems/recentlyupdated/) |
-| GitHub | [PET-FAMILY-QA](https://github.com/PET-FAMILYY/PET-FAMILY-QA) |
-| Vídeo dos Testes | [https://youtu.be/t1PxkP_zZYs] |
-
-A entrega será disponibilizada em um repositório público do GitHub, na branch `develop`, com os links necessários para avaliação.
-
-O acesso do professor à organização e ao projeto Azure DevOps também deverá ser confirmado.
-
----
-
-*Documentação da 4ª Sprint — Compliance, Quality Assurance & Tests — FIAP 2026.*
+🎓 Disciplina
+Compliance, Quality Assurance & Tests
+Professor: Dr. Gustavo Molina Félix
+Curso: Tecnologia em Análise e Desenvolvimento de Sistemas — FIAP 2026
