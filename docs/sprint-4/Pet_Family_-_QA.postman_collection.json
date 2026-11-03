@@ -1,0 +1,382 @@
+{
+  "info": {
+    "_postman_id": "03db47a3-bda6-4901-ad92-90ae0f24b379",
+    "name": "Pet Family - QA",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52940584"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "Login - Tutor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Token JWT presente\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.token).to.be.a('string');",
+                  "});",
+                  "",
+                  "pm.environment.set(\"token\", pm.response.json().token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"pedro@petfamily.com\",\r\n    \"senha\": \"senha123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/login",
+              "host": ["{{baseURL}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Veterinário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Token JWT veterinário presente\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.token).to.be.a('string');",
+                  "});",
+                  "",
+                  "pm.environment.set(\"tokenVet\", pm.response.json().token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"veterinario@petfamily.com\",\r\n    \"senha\": \"senha123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/login",
+              "host": ["{{baseURL}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Interações IA",
+      "item": [
+        {
+          "name": "Post - Interação IA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Resposta contém pergunta e resposta da IA\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.pergunta).to.be.a('string');",
+                  "    pm.expect(json.resposta).to.be.a('string');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"pergunta\": \"Meu cachorro está com tosse, o que pode ser?\",\r\n  \"categoria\": \"Sintomas\",\r\n  \"petId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/interacoes-ia",
+              "host": ["{{baseURL}}"],
+              "path": ["interacoes-ia"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get - Interações IA (Veterinário)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Retorna lista de interações\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tokenVet}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/interacoes-ia",
+              "host": ["{{baseURL}}"],
+              "path": ["interacoes-ia"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get - Interações IA/ID (Tutor)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Retorna histórico do pet\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/interacoes-ia/pet/1",
+              "host": ["{{baseURL}}"],
+              "path": ["interacoes-ia", "pet", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post - Interação IA com Erro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 401 Unauthorized\", function () {",
+                  "    pm.response.to.have.status(401);",
+                  "});",
+                  "",
+                  "pm.test(\"Mensagem de token inválido presente\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.message).to.include(\"Token\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"pergunta\": \"Teste sem autenticação\",\r\n  \"categoria\": \"Sintomas\",\r\n  \"petId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/interacoes-ia",
+              "host": ["{{baseURL}}"],
+              "path": ["interacoes-ia"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Agendamento",
+      "item": [
+        {
+          "name": "Post - Agendar Consulta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Consulta criada com status AGENDADA\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.status).to.equal(\"AGENDADA\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"petId\": 1,\r\n  \"tipoConsulta\": \"Vacinação\",\r\n  \"data\": \"2026-12-10\",\r\n  \"horario\": \"14:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/consultas/agendar",
+              "host": ["{{baseURL}}"],
+              "path": ["consultas", "agendar"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post - Agendar Consulta com Data Inválida",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 400 Bad Request\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "",
+                  "pm.test(\"Mensagem de data inválida presente\", function () {",
+                  "    var json = pm.response.json();",
+                  "    pm.expect(json.details).to.include(\"futuros\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"petId\": 1,\r\n  \"tipoConsulta\": \"Vacinação\",\r\n  \"data\": \"1945-03-01\",\r\n  \"horario\": \"14:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/consultas/agendar",
+              "host": ["{{baseURL}}"],
+              "path": ["consultas", "agendar"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
