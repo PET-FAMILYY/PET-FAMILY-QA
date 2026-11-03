@@ -1,3 +1,4 @@
+🐾 Pet Family — QA & Tests
 Compliance, Quality Assurance & Tests
 Challenge CLYVO VET 2026 — FIAP | 2TDSPG
 
@@ -145,3 +146,4 @@ Vitor Dias dos Santos	RM565422
 Compliance, Quality Assurance & Tests
 Professor: Dr. Gustavo Molina Félix
 Curso: Tecnologia em Análise e Desenvolvimento de Sistemas — FIAP 2026
+Pet Family — Quality Assurance & Tests • Challenge CLYVO VET 2026.
