@@ -134,7 +134,7 @@ A demonstração apresentará a configuração do Postman, os scripts de automa�
 |---|---|
 | Azure Boards | [Pet Family — Azure DevOps](https://dev.azure.com/RM561810/Pet%20Family%20-%20ClyvoVet%20Challenge/_workitems/recentlyupdated/) |
 | GitHub | [PET-FAMILY-QA](https://github.com/PET-FAMILYY/PET-FAMILY-QA) |
-| Vídeo dos Testes | [ADICIONAR LINK] |
+| Vídeo dos Testes | [https://youtu.be/t1PxkP_zZYs] |
 
 A entrega será disponibilizada em um repositório público do GitHub, na branch `develop`, com os links necessários para avaliação.
 
